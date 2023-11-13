@@ -1,39 +1,29 @@
 #include<string>
 #include <iostream>
+#include <stack>
 
 using namespace std;
 
 bool solution(string s)
 {
-    bool answer = true;
-    int leftCnt = 0;
-    int RightCnt =0;
+     std::stack<char> st;
 
-    int i=0;
-
-   while (s[i])
-   {
-        if(s[i] == '(')
-        leftCnt ++;
-
-        if(s[i] == ')')
+    for (char test : s) 
+    {
+        if (test == '(') 
         {
-             RightCnt++;
-
-             if(RightCnt > leftCnt)
-             {
+            st.push(test);
+        } 
+        else if (test == ')') 
+        {
+            if (st.empty()) 
+            {
                 return false;
-             }
-             else
-             {
-                answer = true;
-             }
+            }
+            st.pop();
         }
-         if(RightCnt < leftCnt)
-             {
-                answer =  false;
-             }
-          ++i;
-   }
-    return answer;
+    }
+
+    return st.empty(); 
+ 
 }
