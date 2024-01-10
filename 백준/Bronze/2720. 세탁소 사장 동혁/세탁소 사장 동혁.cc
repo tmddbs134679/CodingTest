@@ -1,74 +1,38 @@
 #include <iostream>
-#include <stack>
 #include <vector>
-#include <algorithm>
-#include <cmath>
 
 using namespace std;
 
+int main() {
+    int cnt;
+    cin >> cnt;
 
-int main()
-{
-	
-	int cnt;
-	int Q = 25;
-	int D = 10;
-	int N = 5;
-	int P = 1;
+    vector<vector<int>> arr(cnt, vector<int>(4));
 
-	cin >> cnt;
+    int Q = 25, D = 10, N = 5, P = 1;
 
-	std::vector<std::vector<int>> arr(cnt, std::vector<int>(4));
+    for (int i = 0; i < cnt; ++i) {
+        int ch;
+        cin >> ch;
 
-	for (int i = 0; i < cnt; ++i)
-	{
+        arr[i][0] = ch / Q; // 큰 동전부터 개수 계산
+        ch %= Q;
 
-		int inc = 0;
+        arr[i][1] = ch / D;
+        ch %= D;
 
-		int q, d, n, p;
-		int ch;
+        arr[i][2] = ch / N;
+        ch %= N;
 
-			cin >> ch;
+        arr[i][3] = ch / P;
+    }
 
-		
+    for (int i = 0; i < cnt; ++i) {
+        for (int j = 0; j < 4; ++j) {
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
 
-			while (ch)
-			{
-				q = ch / Q;
-				ch -= q * Q;
-				arr[i][inc] = q;
-				inc++;
-
-
-
-				d = ch / D;
-				ch -= d * D;
-				arr[i][inc] = d;
-				inc++;
-
-				n = ch / N;
-				ch -= n * N;
-				arr[i][inc] = n;
-				inc++;
-
-				p = ch / P;
-				arr[i][inc] = p;
-				ch -= p * P;
-
-			}
-
-	}
-
-
-	for (int i = 0; i < cnt; ++i)
-	{
-		for (int j = 0; j < 4; ++j)
-		{
-			cout << arr[i][j] << " ";
-		}
-		cout << endl;
-	}
-
-	return 0;
+    return 0;
 }
-
