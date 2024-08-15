@@ -6,24 +6,37 @@ using namespace std;
 
 bool solution(string s)
 {
-     std::stack<char> st;
+     bool answer = true;
 
-    for (char test : s) 
+    stack<int> stk;
+    int cnt = 0;
+    for (auto check : s)
     {
-        if (test == '(') 
+        stk.push(check);
+
+        if (stk.top() == '(')
         {
-            st.push(test);
-        } 
-        else if (test == ')') 
+            cnt++;
+        }
+        else
         {
-            if (st.empty()) 
+            if (cnt <= 0)
             {
                 return false;
             }
-            st.pop();
+            else
+            {
+                stk.pop();
+                stk.pop();
+                cnt--;
+            }
         }
-    }
 
-    return st.empty(); 
- 
+
+    }
+    if (!stk.empty())
+        return false;
+
+
+    return answer;
 }
