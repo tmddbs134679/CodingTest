@@ -1,50 +1,45 @@
-#include <iostream>
 #include <string>
 #include <vector>
-#include <unordered_map>
-#include <map>
-#include <algorithm>
 #include <queue>
 
+
+
 using namespace std;
-vector<int> solution(vector<int> progresses, vector<int> speeds)
+
+vector<int> solution(vector<int> progresses, vector<int> speeds) 
 {
-    vector<int> answer;
+   vector<int> answer;
 
-    queue<int> distribution;
-
-    for (int i = 0; i < progresses.size(); ++i)
+    queue<int> qe;
+    for (int i = 0; i < speeds.size(); ++i)
     {
-        int rest = 100 - progresses[i];
-        int day = 0;
-
-        while (rest > 0)
+        int per = progresses[i];
+        int cnt = 0;
+        while (per < 100)
         {
-            rest -= speeds[i];
-            day++;
-        }
-
-        distribution.push(day);
-    }
-
-    while (!distribution.empty())
-    {
-        int cnt = 1;
-        int cur_progress = distribution.front();
-        distribution.pop();
-
-
-        while (!distribution.empty() && distribution.front() <= cur_progress)
-        {
+            per += speeds[i];
             cnt++;
-            distribution.pop();
         }
 
-        answer.push_back(cnt);
+        qe.push(cnt);
     }
+
+    while (!qe.empty())
+    {
+        int result = 1;
+        int pre = qe.front();
+        qe.pop();
+        
+        while (pre >= qe.front())
+        {
+            result++;
+            qe.pop();
+            if (qe.empty())
+                break;
+        }
+        answer.push_back(result);
+    }
+
 
     return answer;
-
 }
-
-
