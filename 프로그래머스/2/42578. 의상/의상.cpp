@@ -4,24 +4,20 @@
 
 using namespace std;
 
-int solution(vector<vector<string>> clothes)
+int solution(vector<vector<string>> clothes) 
 {
-    map<string, int> com;
-
-    for (const auto &cs : clothes)
-    {
-        com[cs[1]]++;
-
-
-    }
-
     int answer = 1;
-
-    for (const auto& pair : com)
+    map<string, int> cl_map;
+    
+    for(auto test : clothes)
     {
-        answer *= (pair.second + 1);
+        cl_map[test[1]]++;
     }
-
-  
-    return answer -1 ;
+    
+    for(auto test : cl_map)
+    {
+        answer *= test.second + 1;
+    }
+    
+    return answer - 1;
 }
