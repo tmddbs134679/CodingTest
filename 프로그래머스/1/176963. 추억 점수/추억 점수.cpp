@@ -22,7 +22,7 @@ vector<int> solution(vector<string> name, vector<int> yearning, vector<vector<st
         {
             auto it = mismap.find(photo[i][j]);
 
-            if (it != mismap.end() && it->first == photo[i][j])
+            if (it != mismap.end())
             {
                 point += it->second;
             }
