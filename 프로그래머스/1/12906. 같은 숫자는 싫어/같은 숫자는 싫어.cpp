@@ -5,35 +5,36 @@
 
 using namespace std;
 
-vector<int> solution(vector<int> arr) 
+
+
+vector<int> solution(vector<int> arr)
 {
     vector<int> answer;
-    stack<int> stk;
-    
-    for(auto test : arr)
+    stack<int> s;
+
+    for (int i = 0; i < arr.size(); i++)
     {
-        if(stk.empty())
-        {
-           stk.push(test); 
-        }
+        if (s.empty())
+            s.push(arr[i]);
         else
         {
-            if(stk.top() != test)
+            if (s.top() != arr[i])
             {
-                 stk.push(test); 
+                s.push(arr[i]);
+           
             }
+      
         }
     }
- 
-   while (!stk.empty())
-   {
-        answer.push_back(stk.top());
-        stk.pop();
+    
+    while (!s.empty())
+    {
+        answer.push_back(s.top());
+        s.pop();
     }
-    
-   
-    std::reverse(answer.begin(), answer.end());
-    
 
+    reverse(answer.begin(), answer.end());
     return answer;
 }
+
+
