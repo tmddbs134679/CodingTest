@@ -1,45 +1,44 @@
 #include <string>
 #include <vector>
 #include <queue>
-
+#include <iostream>
 
 
 using namespace std;
 
-vector<int> solution(vector<int> progresses, vector<int> speeds) 
+vector<int> solution(vector<int> progresses, vector<int> speeds)
 {
-   vector<int> answer;
+    vector<int> answer;
+    vector<int> days;
 
-    queue<int> qe;
-    for (int i = 0; i < speeds.size(); ++i)
+    // 기능 완료까지 남은 일수 계산
+    for (int i = 0; i < progresses.size(); i++)
     {
-        int per = progresses[i];
-        int cnt = 0;
-        while (per < 100)
-        {
-            per += speeds[i];
-            cnt++;
-        }
-
-        qe.push(cnt);
+        int remain = (100 - progresses[i] + speeds[i] - 1) / speeds[i]; // 올림 계산
+        days.push_back(remain);
     }
 
-    while (!qe.empty())
+    int deploy_day = days[0];
+    int count = 1;
+
+    for (int i = 1; i < days.size(); i++)
     {
-        int result = 1;
-        int pre = qe.front();
-        qe.pop();
-        
-        while (pre >= qe.front())
+        if (days[i] <= deploy_day)
         {
-            result++;
-            qe.pop();
-            if (qe.empty())
-                break;
+            count++;
         }
-        answer.push_back(result);
+        else
+        {
+            answer.push_back(count);
+            deploy_day = days[i];
+            count = 1;
+        }
     }
 
+    answer.push_back(count); // 마지막 배포 처리
 
     return answer;
 }
+
+
+
