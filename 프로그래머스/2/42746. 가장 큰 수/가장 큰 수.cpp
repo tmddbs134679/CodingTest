@@ -1,44 +1,35 @@
-#include <iostream>
 #include <string>
 #include <vector>
-#include <unordered_map>
-#include <map>
+#include <string>
 #include <algorithm>
-#include <queue>
-
-
 using namespace std;
-bool compare(const string& a, const string& b)
-{
 
- 
+
+bool compare(const string& a, const string& b) 
+{
     return a + b > b + a;
 }
 
-using namespace std;
-string solution(vector<int> numbers)
+string solution(vector<int> numbers) 
 {
     string answer = "";
 
-    
-    vector<string> st;
- 
-
-    for (auto num : numbers)
-    {   
-        string itos = to_string(num);
-        st.push_back(itos);
-    }
-
-    sort(st.begin(), st.end(), compare);
-
-    for (string str : st)
+    vector<string> s;
+    for (auto a : numbers) 
     {
-        answer += str;
-
+        s.push_back(to_string(a));
     }
 
-    if (answer[0] == '0') return "0";
+    sort(s.begin(), s.end(), compare);
+
+    // 예외 처리: 모두 0일 경우
+    if (s[0] == "0")
+        return "0";
+
+    for (auto a : s) 
+    {
+        answer += a;
+    }
+
     return answer;
 }
-
