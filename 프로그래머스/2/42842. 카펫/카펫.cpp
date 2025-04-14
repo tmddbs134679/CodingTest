@@ -1,31 +1,33 @@
 #include <string>
 #include <vector>
-#include <cmath>
+
 using namespace std;
 
-vector<int> solution(int brown, int red) 
+vector<int> solution(int brown, int yellow)
 {
     vector<int> answer;
+    int total = brown + yellow;
 
-    int total = brown + red; 
 
-    for (int i = 1; i <= sqrt(total); ++i) 
+    for (int row = 3; row < total; ++row)
     {
-        if (total % i == 0) 
-        {
-            int row = total / i; 
-            int col = i; 
+        if (total % row != 0)
+            continue;
 
-        
-            int brown_check = (row * 2) + (col - 2) * 2;
-            if (brown == brown_check) 
-            {
-                answer.push_back(row);
-                answer.push_back(col);
-                break;
-            }
+        int col = total / row;
+
+        int icol = col - 2;
+        int irow = row - 2;
+
+        if (col < row) continue;
+
+        if (icol * irow == yellow)
+        {
+            answer.push_back(col);
+            answer.push_back(row);
         }
     }
+    
 
     return answer;
 }
