@@ -1,8 +1,6 @@
 # CodingTest
 
-Welcome! 👋  
-This repository automatically stores my coding solutions for algorithm problems from platforms like **Baekjoon Online Judge** and **Programmers**, managed via [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
-
+코딩 테스트 풀기!
 ---
 
 ## 📌 목표 (Goals)
