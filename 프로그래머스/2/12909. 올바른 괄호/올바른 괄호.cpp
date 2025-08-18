@@ -7,24 +7,40 @@ using namespace std;
 bool solution(string s)
 {
     bool answer = true;
-  
-    stack<char> stk;
-
-    for (auto c : s)
+    
+    stack<char> st;
+    st.push(s[0]);
+    
+    if(st.top() == ')')
+        return false;
+    
+    for(int i = 1; i < s.size(); i++)
     {
-        if (c == '(')
+        
+        if(!st.empty())
         {
-            stk.push(c);
+            char front = st.top();
+        
+            if(s[i] == '(')
+            {
+                st.push(s[i]);
+                continue;
+            }
+            else
+            {
+                st.pop();
+            }
         }
         else
         {
-            if (stk.empty())
+            if(s[i] == ')')
                 return false;
-
-            stk.pop();
+            else
+                st.push(s[i]);
         }
     }
-
-
-    return stk.empty();
+  if(!st.empty())
+            return false;
+    
+    return answer;
 }
