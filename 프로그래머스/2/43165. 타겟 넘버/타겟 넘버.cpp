@@ -1,32 +1,19 @@
 #include <string>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
-int answer = 0;
 
-void DFS(vector<int>& numbers, int target, int count , int result)
+int dfs(vector<int>& a, int count, int sum, int target)
 {
-    if (count == numbers.size())
-    {
-        if (result == target)
-        {
-            answer++;
-        }
-        return;
-    }
-
-    DFS(numbers, target, count + 1, result + numbers[count]);
-    DFS(numbers, target, count + 1, result - numbers[count]);
-
+    if(count == a.size())
+        return sum == target ? 1 : 0;
+    
+    return dfs(a, count + 1, sum + a[count], target) + dfs(a, count + 1, sum - a[count], target);
 }
 
 
-int solution(vector<int> numbers, int target)
+int solution(vector<int> numbers, int target) 
 {
-  
-    DFS(numbers, target, 0, 0);
-   
-    return answer;
+    return dfs(numbers, 0, 0, target);
 }
